@@ -2,7 +2,8 @@ import sys
 import sqlite3
 conn = sqlite3.connect(':memory:')
 
-class crerDB:
+
+class crearDB:
     c = conn.cursor()
 
     c.execute('''CREATE TABLE cines
@@ -12,25 +13,25 @@ class crerDB:
     c.execute("""insert into cines
           values (1,'CineStark')""")
 
-
+    conn.commit()
     c.execute('''CREATE TABLE peliculas
-                 (Spelicula int, pelicula text )''')
-    c.execute("""insert into funciones
+                 (peliculaid int, pelicula text )''')
+    c.execute("""insert into peliculas
            values (1,'IT')""")
-    c.execute("""insert into funciones
+    c.execute("""insert into peliculas
            values (2,'La hora Final')""")
-    c.execute("""insert into funciones
+    c.execute("""insert into peliculas
            values (3,'Desaparecido')""")
-    c.execute("""insert into funciones
+    c.execute("""insert into peliculas
            values (4,'Deep el Pulpo')""")
-
+    conn.commit()
 
     c.execute('''CREATE TABLE funciones
         (cine int,Spelicula int, funcion text )''')
     c.execute("""insert into funciones
           values (1,1,'19:00')""")
     c.execute("""insert into funciones
-          values (1,1,20.30')""")
+          values (1,1,'20.30')""")
     c.execute("""insert into funciones
           values (1,1,'22.00')""")
     c.execute("""insert into funciones
