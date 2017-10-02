@@ -2,7 +2,6 @@ import sys
 import sqlite3
 conn = sqlite3.connect(':memory:')
 
-
 class crerDB:
     c = conn.cursor()
 
@@ -27,25 +26,34 @@ class crerDB:
 
 
     c.execute('''CREATE TABLE funciones
-        (cine text,spelicula int, funcion text )''')
+        (cine int,Spelicula int, funcion text )''')
     c.execute("""insert into funciones
-          values ('CinePlaneta','1','19:00')""")
+          values (1,1,'19:00')""")
     c.execute("""insert into funciones
-          values ('CinePlaneta','1','20.30')""")
+          values (1,1,20.30')""")
     c.execute("""insert into funciones
-          values ('CinePlaneta','1','22.00')""")
+          values (1,1,'22.00')""")
     c.execute("""insert into funciones
-          values ('CinePlaneta','2','21.00')""")
+          values (1,2,'21.00')""")
     c.execute("""insert into funciones
-          values ('CinePlaneta','3','20.00')""")
+          values (1,2,'20.00')""")
     c.execute("""insert into funciones
-          values ('CinePlaneta','3','23.00')""")
+          values (1,3,'23.00')""")
     c.execute("""insert into funciones
-          values ('CinePlaneta','4','16.00')""")
+          values (1,4,'16.00')""")
 
+    c.execute("""insert into funciones
+          values (2,3,'21.00')""")
+    c.execute("""insert into funciones
+          values (2,3,'23.00')""")
+    c.execute("""insert into funciones
+          values (2,4,'16.00')""")
+    c.execute("""insert into funciones
+          values (2,4,'20.00')""")
 
     conn.commit()
     c.close()
+
 
 class Entrada:
     def __init__(self, entrada_id, pelicula_id, funcion_id, cantidad):
