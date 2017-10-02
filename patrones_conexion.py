@@ -5,7 +5,7 @@ conn = sqlite3.connect(':memory:')
 class crerDB:
     c = conn.cursor()
 
-        c.execute('''CREATE TABLE cines
+    c.execute('''CREATE TABLE cines
                      (cine int, NombreCine text )''')
     c.execute("""insert into cines
           values (1,'CinePlaneta')""")
