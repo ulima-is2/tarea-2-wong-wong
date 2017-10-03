@@ -155,10 +155,10 @@ class CineManager:
             opcion = input('Opción: ')
 
             if opcion == '1':
-                gestionar_mostar_peliculas()
+                self.gestionar_mostar_cines()
 
             elif opcion == '2':
-                self.gestionar_mostar_funciones()
+                self.gestionar_mostar_peliculas()
 
             elif opcion == '3':
                 self.gestionar_anadir_entrada()
@@ -166,9 +166,9 @@ class CineManager:
                 terminado = True
             else:
                 print(opcion)
-    def gestionar_mostar_peliculas(self):
+    def gestionar_mostar_cines(self):
         self.encapsular([self.listar_cines])
-    def gestionar_mostar_funciones(self):
+    def gestionar_mostar_peliculas(self):
         self.encapsular([self.listar_cines])
 
         cine = self.select_cine()
@@ -178,7 +178,7 @@ class CineManager:
             for keys,values in peliculas.items():
                 print(str(keys) + ":" + str(values))
 
-                self.encapsular([aux]) 
+        self.encapsular([aux]) 
     def gestionar_anadir_entrada(self):
         self.encapsular(['COMPRAR ENTRADA', self.listar_cines])
         cine = self.select_cine()
