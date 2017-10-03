@@ -1,5 +1,7 @@
 import sys
+import patrones_cambiado_conexion
 
+from patrones_cambiado_conexion import *
 class Entrada:
     def __init__(self, entrada_id, pelicula_id, funcion_id, cantidad):
         self.entrada_id = entrada_id
@@ -78,8 +80,27 @@ class CineManager:
     def __init__(self):
         self.cinePlaneta = CinePlaneta()
         self.cineStark = CineStark()
-        self.init_CinePlaneta()
-        self.init_CineStark()
+        conn = Coneccion()
+        conn.crearDB()
+        conn.inserts()
+        self.init_general(conn, CineManager.cinePlaneta)
+        self.init_general(conn, CineManager.cineStark)
+        #self.init_CinePlaneta()
+        #self.init_CineStark()
+
+    def init_general(self, conn, cine):
+        conn = Coneccion()
+        x = None
+        if cine == CineManager.cinePlaneta:
+            x = 1
+        elif cine == CineManager.cineStark:
+            x = 2
+        peliculas_Planeta=conn.listar_peliculas(x)
+        for peli in peliculas_Planeta:
+            funciones = conn.listar_funciones(x, peli.id)
+            for funcion in funciones:
+                peli.anadir_funcion(funcion)
+            cine.anadir_pelicula(peli)
 
     def init_CinePlaneta(self):
         peliculaIT = Pelicula(1, 'IT')
@@ -207,7 +228,10 @@ class CineManager:
 
 
         cantidad_entradas = input('Ingrese cantidad de entradas: ')
-        entrada = Entrada(len(cine.listar_entradas(pelicula_elegida, funcion_elegida))+1, pelicula_elegida, funcion_elegida, cantidad_entradas)
+
+        conn = Coneccion()
+        entrada = conn.anadir_entrada(pelicula_elegida, funcion_elegida, cantidad_entradas)
+        #entrada = Entrada(len(cine.listar_entradas(pelicula_elegida, funcion_elegida))+1, pelicula_elegida, funcion_elegida, cantidad_entradas)
         cine.guardar_entrada(entrada)
         print('Se realizó la compra de la entrada. Código es {}'.format(entrada.entrada_id))
 
